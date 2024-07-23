@@ -191,13 +191,13 @@ export function loopTimers(){
 // Adds accelerated time if enough time has passed since `global.stats.current`. Returns true if there was accelerated
 // time added. If the parameter is true, it will only add the time if a threshold of 120s has been reached.
 export function addATime(currentTimestamp){
+    // ghong
+    let atMax = 34560;
+
     // The second case is used for the initialization of atrack.t.
     if (exceededATimeThreshold(currentTimestamp) || global.stats.hasOwnProperty('current') && global.settings.at > 0){
         let timeDiff = currentTimestamp - global.stats.current;
         // Removing any accelerated time if the value is larger than the cap.
-
-        // ghong
-        let atMax = 34560;
         // ghong
         if (global.settings.at > atMax){
             global.settings.at = 0;
@@ -218,6 +218,13 @@ export function addATime(currentTimestamp){
         atrack.t = global.settings.at;
         // Updating the current date so that it won't be counted twice (e.g., when unpausing).
         global.stats.current = currentTimestamp;
+    }
+
+    // ghong
+    if (global.settings.at <= 0 ){
+        console.log("asdfasdfas");
+        global.settings.at = atMax;
+        atrack.t = global.settings.at;
     }
 }
 

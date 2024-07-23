@@ -1193,7 +1193,8 @@ function loadSpecialResource(name,color) {
                 break;
     
             case 'Phage':
-                desc.append($(`<span>${loc(global.prestige.AntiPlasmid.count > 0 ? `resource_Phage_desc2` : `resource_Phage_desc`,[250 + global.prestige.Phage.count])}</span>`));
+                // ghong
+                desc.append($(`<span>${loc(global.prestige.AntiPlasmid.count > 0 ? `resource_Phage_desc2` : `resource_Phage_desc`,[450 + global.prestige.Phage.count*2])}</span>`));
                 let phageSpatial = spatialReasoning(1,'phage');
                 if (global.genes['store'] && global.genes['store'] >= 4){
                     if (phageSpatial > 1){
