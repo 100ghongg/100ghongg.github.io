@@ -1125,6 +1125,109 @@ export const genePool = {
             blood();
         }
     },
+    // ghong
+    time_acceleration_boost_1: {
+        id: 'genes-time_acceleration_boost_1',
+        title: loc('arpa_genepool_time_acceleration_boost_1_title'),
+        desc: loc('arpa_genepool_time_acceleration_boost_1_desc'),
+        reqs: {},
+        grant: ['timeaccel',1],
+        cost: {
+            Plasmid(){ return 25; },
+        },
+        action(){
+            if (payCrispr('time_acceleration_boost_1')){
+                return true;
+            }
+            return false;
+        }
+    },
+    time_acceleration_boost_2: {
+        id: 'genes-time_acceleration_boost_2',
+        title: loc('arpa_genepool_time_acceleration_boost_2_title'),
+        desc: loc('arpa_genepool_time_acceleration_boost_2_desc'),
+        reqs: { timeaccel: 1 },
+        grant: ['timeaccel',2],
+        cost: {
+            Plasmid(){ return 150; },
+        },
+        action(){
+            if (payCrispr('time_acceleration_boost_2')){
+                return true;
+            }
+            return false;
+        }
+    },
+    time_acceleration_boost_3: {
+        id: 'genes-time_acceleration_boost_3',
+        title: loc('arpa_genepool_time_acceleration_boost_3_title'),
+        desc: loc('arpa_genepool_time_acceleration_boost_3_desc'),
+        reqs: { timeaccel: 2 },
+        grant: ['timeaccel',3],
+        cost: {
+            Plasmid(){ return 500; },
+            Phage(){ return 10; }
+        },
+        action(){
+            if (payCrispr('time_acceleration_boost_3')){
+                return true;
+            }
+            return false;
+        }
+    },
+    time_acceleration_boost_4: {
+        id: 'genes-time_acceleration_boost_4',
+        title: loc('arpa_genepool_time_acceleration_boost_4_title'),
+        desc: loc('arpa_genepool_time_acceleration_boost_4_desc'),
+        reqs: { timeaccel: 3 },
+        grant: ['timeaccel',4],
+        cost: {
+            Plasmid(){ return 1800; },
+            Phage(){ return 35; },
+            Dark(){ return 0.3 }
+        },
+        action(){
+            if (payCrispr('time_acceleration_boost_4')){
+                return true;
+            }
+            return false;
+        }
+    },
+    time_acceleration_boost_5: {
+        id: 'genes-time_acceleration_boost_5',
+        title: loc('arpa_genepool_time_acceleration_boost_5_title'),
+        desc: loc('arpa_genepool_time_acceleration_boost_5_desc'),
+        reqs: { timeaccel: 4 },
+        grant: ['timeaccel', 5],
+        cost: {
+            Plasmid(){ return 3500; },
+            Phage(){ return 100; },
+            Dark(){ return 1.0 }
+        },
+        action(){
+            if (payCrispr('time_acceleration_boost_5')){
+                return true;
+            }
+            return false;
+        }
+    },
+    time_acceleration_infinite: {
+        id: 'genes-time_acceleration_infinite',
+        title: loc('arpa_genepool_time_acceleration_infinite_title'),
+        desc: loc('arpa_genepool_time_acceleration_infinite_desc'),
+        reqs: { timeaccel: 3 },
+        grant: ['timeaccelinf', 1],
+        cost: {
+            Plasmid(){ return 500; },
+            Phage(){ return 10; }
+        },
+        action(){
+            if (payCrispr('time_acceleration_infinite')){
+                return true;
+            }
+            return false;
+        }
+    },
 }
 
 export const bloodPool = {

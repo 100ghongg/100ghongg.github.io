@@ -175,7 +175,14 @@ export function loopTimers(){
     // Long loop (game day) takes 5000ms without any modifiers.
     const baseLongTimer = 20 * webWorkerMainTimer;
     // The constant by which the time is accelerated when atrack.t > 0.
-    const timeAccelerationFactor = 3;
+
+    // ghong
+    let timeAccelerationFactorBonus = 0;
+    if (global.genes['timeaccel']) {
+        timeAccelerationFactorBonus = global.genes['timeaccel'] * 0.3;
+    }
+    const timeAccelerationFactor = 2.5 + timeAccelerationFactorBonus;
+    global.settings.timeAccelerationFactor = timeAccelerationFactor;
 
     const aTimeMultiplier = atrack.t > 0 ? 1 / timeAccelerationFactor : 1;
     return {
@@ -192,7 +199,7 @@ export function loopTimers(){
 // time added. If the parameter is true, it will only add the time if a threshold of 120s has been reached.
 export function addATime(currentTimestamp){
     // ghong
-    let atMax = 34560;
+    let atMax = 5760 * global.settings.timeAccelerationFactor;
 
     // The second case is used for the initialization of atrack.t.
     if (exceededATimeThreshold(currentTimestamp) || global.stats.hasOwnProperty('current') && global.settings.at > 0){
@@ -212,7 +219,7 @@ export function addATime(currentTimestamp){
         }
         // Accelerated time is capped at 8*60*60/2.5 game days.
         // ghong
-        if (global.settings.at > atMax || global.settings.at <= 0 ){
+        if (global.settings.at > atMax){
             global.settings.at = atMax;
         }
         atrack.t = global.settings.at;
@@ -221,8 +228,7 @@ export function addATime(currentTimestamp){
     }
 
     // ghong
-    if (global.settings.at <= 0 ){
-        console.log("asdfasdfas");
+    if (global.settings.at <= 0 && global.genes['timeaccelinf'] && global.genes['timeaccelinf'] > 0 ){
         global.settings.at = atMax;
         atrack.t = global.settings.at;
     }
