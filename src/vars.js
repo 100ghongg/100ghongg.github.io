@@ -1194,7 +1194,9 @@ delete global['beta'];
 if (!global.hasOwnProperty('prestige')){
     global.prestige = {};
 }
-['Plasmid','AntiPlasmid','Phage','Dark','Harmony','AICore','Artifact','Blood_Stone'].forEach(function (res){
+// ghong
+// ['Plasmid','AntiPlasmid','Phage','Dark','Harmony','AICore','Artifact','Blood_Stone'].forEach(function (res){
+['Plasmid','AntiPlasmid','Magismid','Evilsmid','Phage','Dark','Harmony','AICore','Artifact','Blood_Stone'].forEach(function (res){
     if (!global.prestige.hasOwnProperty(res)){
         global.prestige[res] = { count: 0 };
     }
@@ -1455,6 +1457,8 @@ export function setupStats(){
         'clumber','tlumber','mad','bioseed','cataclysm','blackhole','ascend','descend','terraform',
         'aiappoc','matrix','retire','eden','geck','dark','harmony','blood','cores','artifact',
         'cattle','tcattle','murders','tmurders','psykill','tpsykill'
+        // ghong
+        , 'magismid', 'evilsmid'
     ].forEach(function(k){
         if (!global.stats.hasOwnProperty(k)){
             global.stats[k] = 0;

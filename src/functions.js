@@ -126,6 +126,8 @@ export function gameLoop(act){
             break;
         case 'start':
             {
+                calcTimeAccelBonus();
+
                 addATime(Date.now());
 
                 const timers = loopTimers();
@@ -176,12 +178,7 @@ export function loopTimers(){
     const baseLongTimer = 20 * webWorkerMainTimer;
     // The constant by which the time is accelerated when atrack.t > 0.
 
-    // ghong
-    let timeAccelerationFactorBonus = 0;
-    if (global.genes['timeaccel']) {
-        timeAccelerationFactorBonus = global.genes['timeaccel'] * 0.3;
-    }
-    const timeAccelerationFactor = 2.5 + timeAccelerationFactorBonus;
+    const timeAccelerationFactor = 2.5 + Number(global.settings.timeAccelerationFactorBonus);
     global.settings.timeAccelerationFactor = timeAccelerationFactor;
 
     const aTimeMultiplier = atrack.t > 0 ? 1 / timeAccelerationFactor : 1;
@@ -193,6 +190,21 @@ export function loopTimers(){
         baseLongTimer,
         timeAccelerationFactor,
     };
+}
+
+// ghong
+export function calcTimeAccelBonus(){
+    let timeAccelerationFactorBonus = 0;
+    if (global.genes['timeaccel']) {
+        let bonusValue = 0, bonusRate = 0.3;
+        let gap = 0;
+        for (let i=0; i<global.genes['timeaccel']; i++){
+            if (i % 3 == 0) gap+=1;
+            bonusValue += gap;
+        }
+        timeAccelerationFactorBonus = (bonusValue * bonusRate).toFixed(1);
+    }
+    global.settings.timeAccelerationFactorBonus = timeAccelerationFactorBonus;
 }
 
 // Adds accelerated time if enough time has passed since `global.stats.current`. Returns true if there was accelerated

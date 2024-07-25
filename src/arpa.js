@@ -1165,7 +1165,7 @@ export const genePool = {
         reqs: { timeaccel: 2 },
         grant: ['timeaccel',3],
         cost: {
-            Plasmid(){ return 500; },
+            Plasmid(){ return 400; },
             Phage(){ return 10; }
         },
         action(){
@@ -1182,9 +1182,8 @@ export const genePool = {
         reqs: { timeaccel: 3 },
         grant: ['timeaccel',4],
         cost: {
-            Plasmid(){ return 1800; },
-            Phage(){ return 35; },
-            Dark(){ return 0.3 }
+            Plasmid(){ return 800; },
+            Phage(){ return 30; }
         },
         action(){
             if (payCrispr('time_acceleration_boost_4')){
@@ -1200,12 +1199,47 @@ export const genePool = {
         reqs: { timeaccel: 4 },
         grant: ['timeaccel', 5],
         cost: {
-            Plasmid(){ return 3500; },
-            Phage(){ return 100; },
-            Dark(){ return 1.0 }
+            Plasmid(){ return 1300; },
+            Phage(){ return 60; }
         },
         action(){
             if (payCrispr('time_acceleration_boost_5')){
+                return true;
+            }
+            return false;
+        }
+    },
+    time_acceleration_boost_6: {
+        id: 'genes-time_acceleration_boost_6',
+        title: loc('arpa_genepool_time_acceleration_boost_6_title'),
+        desc: loc('arpa_genepool_time_acceleration_boost_6_desc'),
+        reqs: { timeaccel: 5 },
+        grant: ['timeaccel', 6],
+        cost: {
+            Plasmid(){ return 1900; },
+            Phage(){ return 100; },
+            Dark(){ return 0.3 }
+        },
+        action(){
+            if (payCrispr('time_acceleration_boost_6')){
+                return true;
+            }
+            return false;
+        }
+    },
+    time_acceleration_boost_7: {
+        id: 'genes-time_acceleration_boost_7',
+        title: loc('arpa_genepool_time_acceleration_boost_7_title'),
+        desc: loc('arpa_genepool_time_acceleration_boost_7_desc'),
+        reqs: { timeaccel: 6 },
+        grant: ['timeaccel', 7],
+        cost: {
+            Plasmid(){ return 2500; },
+            Phage(){ return 150; },
+            Dark(){ return 1.0; }
+        },
+        action(){
+            if (payCrispr('time_acceleration_boost_6')){
                 return true;
             }
             return false;

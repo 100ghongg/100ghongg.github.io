@@ -462,7 +462,8 @@ vBind({
             return global['sim'] ? true : false;
         },
         atRemain(){
-            return loc(`accelerated_time`) + (global.genes['timeaccel'] ? ' (+' + global.genes['timeaccel'] * 0.3 + 'x)' : '');
+            // ghong
+            return loc(`accelerated_time`) + (global.genes['timeaccel'] ? ' (+' + global.settings.timeAccelerationFactorBonus + 'x)' : '');
         },
         pause(){
             $(`#pausegame`).removeClass('play');

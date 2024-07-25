@@ -706,6 +706,9 @@ export function defineResources(wiki){
     loadSpecialResource('Artifact','caution');
     loadSpecialResource('Plasmid');
     loadSpecialResource('AntiPlasmid');
+    // ghong
+    loadSpecialResource('Magismid');
+    // loadSpecialResource('AntiPlasmid');
     loadSpecialResource('Phage');
     loadSpecialResource('Dark');
     loadSpecialResource('Harmony');
@@ -1192,6 +1195,13 @@ function loadSpecialResource(name,color) {
                 }
                 break;
     
+            // ghong
+            case 'Magismid':
+                global.prestige.Magismid.count = 1;
+                let magiBonus = 111;
+                desc.append($(`<span>${loc(`resource_${name}_desc`,[magiBonus])}</span>`));
+                break;
+
             case 'Phage':
                 // ghong
                 desc.append($(`<span>${loc(global.prestige.AntiPlasmid.count > 0 ? `resource_Phage_desc2` : `resource_Phage_desc`,[450 + global.prestige.Phage.count*2])}</span>`));
