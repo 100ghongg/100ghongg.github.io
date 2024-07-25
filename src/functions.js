@@ -126,7 +126,9 @@ export function gameLoop(act){
             break;
         case 'start':
             {
+                // ghong
                 calcTimeAccelBonus();
+                calcUniverseMasteryBonus();
 
                 addATime(Date.now());
 
@@ -205,6 +207,12 @@ export function calcTimeAccelBonus(){
         timeAccelerationFactorBonus = (bonusValue * bonusRate).toFixed(1);
     }
     global.settings.timeAccelerationFactorBonus = timeAccelerationFactorBonus;
+}
+export function calcUniverseMasteryBonus(){
+    let mua_level = universeLevel('magic');
+    let eua_level = universeLevel('evil');
+    global.settings.magicUniverseMasteryBonus = 0.0015 * (mua_level.uLvl + mua_level.uMLvl);
+    global.settings.evilUniverseMasteryBonus = 0.0015 * (eua_level.uLvl + eua_level.uMLvl);
 }
 
 // Adds accelerated time if enough time has passed since `global.stats.current`. Returns true if there was accelerated
@@ -1306,11 +1314,12 @@ export function masteryType(universe,detailed){
         universe = universe || global.race.universe;
         let ua_level = universeLevel(universe);
         // ghong
-        let m_rate = universe === 'standard' ? 0.5 : 0.3;
+        let m_rate = universe === 'standard' ? 0.6 : 0.3;
         let u_rate = global.genes.challenge >= 3 ? 0.3 : 0.2;
         if (global.genes.challenge >= 4 && universe !== 'standard'){
-            m_rate += 0.05;
-            u_rate -= 0.05;
+            m_rate += 0.10;
+            u_rate -= 0.10;
+            // m_rate += 0.05; u_rate -= 0.05;
         }
         if (global.race['weak_mastery'] && universe === 'antimatter'){
             m_rate /= 10;
@@ -1329,10 +1338,15 @@ export function masteryType(universe,detailed){
             m_rate *= 1 + (perk_rank / 100);
             u_rate *= 1 + (perk_rank / 100);
         }
-        let m_mastery = ua_level.aLvl * m_rate;
+        // ghong
+        // let m_mastery = ua_level.aLvl * m_rate;
+        let m_mastery = (ua_level.aLvl + ua_level.aMLvl) * m_rate;
         let u_mastery = 0;
+
         if (universe !== 'standard'){
-            u_mastery = ua_level.uLvl * u_rate;
+            // ghong
+            u_mastery = (ua_level.uLvl + ua_level.uMLvl) * u_rate;
+            // u_mastery = ua_level.uLvl * u_rate;
         }
         if (global.genes.challenge >= 5 && global.race.hasOwnProperty('mastery')){
             m_mastery *= 1 + (traits.mastery.vars()[0] * global.race.mastery / 100);

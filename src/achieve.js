@@ -269,15 +269,24 @@ export function universeLevel(universe){
     let affix = universeAffix(universe);
     let lvl = 0;
     let ulvl = 0;
+    // ghong
+    let uMlvl = 0, aMlvl = 0;
+
     Object.keys(achievements).forEach(function (achievement){
         if (global.stats.achieve[achievement]){
             lvl += global.stats.achieve[achievement].l > 5 ? 5 : global.stats.achieve[achievement].l;
+            // 
+            aMlvl += global.stats.achieve[achievement].l >= 5 ? 1 : 0;
+
             if (global.stats.achieve[achievement][affix]){
                 ulvl += global.stats.achieve[achievement][affix] > 5 ? 5 : global.stats.achieve[achievement][affix];
+                // 
+                uMlvl += global.stats.achieve[achievement][affix] >= 5 ? 1 : 0;
             }
         }
     });
-    return { aLvl: lvl, uLvl: ulvl };
+    // 
+    return { aLvl: lvl, uLvl: ulvl, aMLvl: aMlvl, uMLvl: uMlvl };
 }
 
 export function universeAffix(universe){

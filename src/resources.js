@@ -708,7 +708,7 @@ export function defineResources(wiki){
     loadSpecialResource('AntiPlasmid');
     // ghong
     loadSpecialResource('Magismid');
-    // loadSpecialResource('AntiPlasmid');
+    loadSpecialResource('Evilsmid');
     loadSpecialResource('Phage');
     loadSpecialResource('Dark');
     loadSpecialResource('Harmony');
@@ -1197,9 +1197,13 @@ function loadSpecialResource(name,color) {
     
             // ghong
             case 'Magismid':
-                global.prestige.Magismid.count = 1;
-                let magiBonus = 111;
-                desc.append($(`<span>${loc(`resource_${name}_desc`,[magiBonus])}</span>`));
+                global.prestige.Magismid.count = global.settings.magicUniverseMasteryBonus * 100;
+                desc.append($(`<span>${loc(`resource_${name}_desc`,[global.prestige.Magismid.count])}</span>`));
+                break;
+
+            case 'Evilsmid':
+                global.prestige.Evilsmid.count = global.settings.evilUniverseMasteryBonus * 100;
+                desc.append($(`<span>${loc(`resource_${name}_desc`,[global.prestige.Evilsmid.count])}</span>`));
                 break;
 
             case 'Phage':
@@ -3037,7 +3041,7 @@ export const plasmidBonus = (function (){
                     standard *= 2;
                 }
                 // ghong
-		        standard *= 1.3;
+		        standard *= (1.3 + global.settings.magicUniverseMasteryBonus);
 
                 let shrines = 0;
                 if (global.race['orbit_decayed'] && global.space['ziggurat']){
@@ -3106,7 +3110,7 @@ export const plasmidBonus = (function (){
                 }
 
                 // ghong
-		        anti *= 1.3;
+		        anti *= (1.3 + global.settings.evilUniverseMasteryBonus);
 
                 if (global.tech['outpost_boost'] && global.race['truepath'] && p_on['alien_outpost']){
                     anti *= 2;
