@@ -1156,6 +1156,10 @@ function loadSpecialResource(name,color) {
     }
     color = color || 'special';
 
+    if (name == 'Evilsmid' && global.settings.evilUniverseMasteryBonus > 0){
+        global.prestige.Evilsmid.count = global.settings.evilUniverseMasteryBonus * 100;
+    }   
+
     var res_container = $(`<div id="res${name}" class="resource" v-show="count"><span class="res has-text-${color}">${loc(`resource_${name}_name`)}</span><span class="count">{{ count | round }}</span></div>`);
     $('#resources').append(res_container);
     
@@ -1197,12 +1201,11 @@ function loadSpecialResource(name,color) {
     
             // ghong
             case 'Magismid':
-                global.prestige.Magismid.count = global.settings.magicUniverseMasteryBonus * 100;
-                desc.append($(`<span>${loc(`resource_${name}_desc`,[global.prestige.Magismid.count])}</span>`));
+                // global.prestige.Magismid.count = global.settings.magicUniverseMasteryBonus * 100;
+                desc.append($(`<span>${loc(`resource_${name}_desc`,[global.prestige.Magismid.count, +(plasmidBonus('magi') * 100).toFixed(2)])}</span>`));
                 break;
 
             case 'Evilsmid':
-                global.prestige.Evilsmid.count = global.settings.evilUniverseMasteryBonus * 100;
                 desc.append($(`<span>${loc(`resource_${name}_desc`,[global.prestige.Evilsmid.count])}</span>`));
                 break;
 
@@ -3018,6 +3021,7 @@ export const plasmidBonus = (function (){
         if (!plasma[key]){
             let standard = 0;
             let anti = 0; 
+            let magi = 0;
             if (global.race.universe !== 'antimatter' || global.genes['bleed']){
                 let plasmids = global.race['no_plasmid'] ? Math.min(global.race.p_mutation, global.prestige.Plasmid.count) : global.prestige.Plasmid.count;
                 if (global.race.universe === 'antimatter' && global.genes['bleed']){
@@ -3041,7 +3045,7 @@ export const plasmidBonus = (function (){
                     standard *= 2;
                 }
                 // ghong
-		        standard *= (1.3 + global.settings.magicUniverseMasteryBonus);
+		        standard *= 1.3;
 
                 let shrines = 0;
                 if (global.race['orbit_decayed'] && global.space['ziggurat']){
@@ -3118,6 +3122,31 @@ export const plasmidBonus = (function (){
                 anti /= 3;
             }
 
+            // 여기서 magismid 적용량 다시 구해줘
+            // ghong
+            if (global.prestige.Magismid.count > 0){
+                let ori_plasmids = global.prestige.Plasmid.count;
+                let ori_standard = 0;
+
+                // ghong
+                let p_cap = 450 + global.prestige.Phage.count*2;
+                if (ori_plasmids > p_cap){
+                    ori_standard = (+((Math.log(p_cap + 50) - 3.91202)).toFixed(5) / 2.888) + ((Math.log(ori_plasmids + 1 - p_cap) / Math.LN2 / 250));
+                }
+                else if (ori_plasmids < 0){
+                    ori_standard = 0;
+                }
+                else {
+                    ori_standard = +((Math.log(ori_plasmids + 50) - 3.91202)).toFixed(5) / 2.888;
+                }
+                if (global.tech['outpost_boost'] && global.race['truepath'] && p_on['alien_outpost']){
+                    ori_standard *= 2;
+                }
+		        ori_standard *= 1.3;
+                // ori_standard *= Math.min(1.0, (global.prestige.Magismid.count / global.prestige.Plasmid.count));
+                magi = ori_standard * Math.min(1.0, (global.prestige.Magismid.count / (p_cap*2)));
+            }
+
             if (global.race['nerfed']){
                 if (global.race.universe === 'antimatter'){
                     standard /= 2;
@@ -3130,8 +3159,8 @@ export const plasmidBonus = (function (){
             }
 
             plasma = {};
-            let final = (1 + standard) * (1 + anti) - 1;            
-            plasma[key] = [final,standard,anti];
+            let final = (1 + standard) * (1 + anti) * (1 + magi) - 1;            
+            plasma[key] = [final,standard,anti,magi];
         }
 
         if (type && type === 'raw'){
@@ -3142,6 +3171,9 @@ export const plasmidBonus = (function (){
         }
         else if (type && type === 'antiplasmid'){
             return plasma[key][2];
+        }
+        else if (type && type === 'magi'){
+            return plasma[key][3];
         }
         else {
             return plasma[key][0];

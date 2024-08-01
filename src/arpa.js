@@ -1175,6 +1175,23 @@ export const genePool = {
             return false;
         }
     },
+    time_acceleration_infinite: {
+        id: 'genes-time_acceleration_infinite',
+        title: loc('arpa_genepool_time_acceleration_infinite_title'),
+        desc: loc('arpa_genepool_time_acceleration_infinite_desc'),
+        reqs: { timeaccel: 3 },
+        grant: ['timeaccelinf', 1],
+        cost: {
+            Plasmid(){ return 500; },
+            Phage(){ return 10; }
+        },
+        action(){
+            if (payCrispr('time_acceleration_infinite')){
+                return true;
+            }
+            return false;
+        }
+    },
     time_acceleration_boost_4: {
         id: 'genes-time_acceleration_boost_4',
         title: loc('arpa_genepool_time_acceleration_boost_4_title'),
@@ -1239,24 +1256,25 @@ export const genePool = {
             Dark(){ return 1.0; }
         },
         action(){
-            if (payCrispr('time_acceleration_boost_6')){
+            if (payCrispr('time_acceleration_boost_7')){
                 return true;
             }
             return false;
         }
     },
-    time_acceleration_infinite: {
-        id: 'genes-time_acceleration_infinite',
-        title: loc('arpa_genepool_time_acceleration_infinite_title'),
-        desc: loc('arpa_genepool_time_acceleration_infinite_desc'),
-        reqs: { timeaccel: 3 },
-        grant: ['timeaccelinf', 1],
+    time_acceleration_boost_8: {
+        id: 'genes-time_acceleration_boost_8',
+        title: loc('arpa_genepool_time_acceleration_boost_8_title'),
+        desc: loc('arpa_genepool_time_acceleration_boost_8_desc'),
+        reqs: { timeaccel: 7 },
+        grant: ['timeaccel', 8],
         cost: {
-            Plasmid(){ return 500; },
-            Phage(){ return 10; }
+            Plasmid(){ return 5000; },
+            Phage(){ return 300; },
+            Dark(){ return 3.0; },
         },
         action(){
-            if (payCrispr('time_acceleration_infinite')){
+            if (payCrispr('time_acceleration_boost_8')){
                 return true;
             }
             return false;

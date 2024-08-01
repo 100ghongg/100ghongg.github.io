@@ -759,6 +759,10 @@ function fastLoop(){
         breakdown.p['Global'][loc('resource_AntiPlasmid_name')] = (pBonus[2] * 100) + '%';
         applyPlasmid = true;
     }
+    if (global.prestige.Magismid.count > 0){
+        breakdown.p['Global'][loc('resource_Magismid_name')] = (pBonus[3] * 100) + '%';
+        applyPlasmid = true;
+    }
     if (applyPlasmid){
         global_multiplier += pBonus[0];
     }
@@ -9677,6 +9681,12 @@ function midLoop(){
                         global.stats.antiplasmid += plasma;
                         global.prestige.AntiPlasmid.count += plasma;
                         unlockAchieve('cross');
+                    }
+                    // ghong
+                    else if (global.race['universe'] === 'magic'){
+                        plasmid_type = loc('resource_Magismid' + plasmid_type + '_name');
+                        global.stats.magismid += plasma;
+                        global.prestige.Magismid.count += plasma;
                     }
                     else {
                         plasmid_type = loc('resource_Plasmid' + plasmid_type + '_name');

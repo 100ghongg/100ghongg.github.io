@@ -30,6 +30,11 @@ export function warhead(){
             global.prestige.AntiPlasmid.count += gains.plasmid;
             global.stats.antiplasmid += gains.plasmid;
         }
+        // ghong
+        else if (global.race.universe === 'magic'){
+            global.prestige.Magismid.count += gains.plasmid;
+            global.stats.magismid += gains.plasmid;
+        }
         else {
             global.prestige.Plasmid.count += gains.plasmid;
             global.stats.plasmid += gains.plasmid;
@@ -105,6 +110,11 @@ export function bioseed(){
     global.stats.phage += gains.phage;
     if (global.race.universe === 'antimatter'){
         global.prestige.AntiPlasmid.count += gains.plasmid;
+        global.stats.antiplasmid += gains.plasmid;
+    }
+    // ghong
+    if (global.race.universe === 'magic'){
+        global.prestige.Magismid.count += gains.plasmid;
         global.stats.antiplasmid += gains.plasmid;
     }
     else {
@@ -244,6 +254,11 @@ export function cataclysm_end(){
             global.prestige.AntiPlasmid.count += gains.plasmid;
             global.stats.antiplasmid += gains.plasmid;
         }
+        // ghong
+        else if (global.race.universe === 'magic'){
+            global.prestige.Magismid.count += gains.plasmid;
+            global.stats.magismid += gains.plasmid;
+        }
         else {
             global.prestige.Plasmid.count += gains.plasmid;
             global.stats.plasmid += gains.plasmid;
@@ -371,6 +386,11 @@ export function big_bang(){
         global.prestige.AntiPlasmid.count += gains.plasmid;
         global.stats.antiplasmid += gains.plasmid;
     }
+    // ghong
+    else if (global.race.universe === 'magic'){
+        global.prestige.Magismid.count += gains.plasmid;
+        global.stats.magismid += gains.plasmid;
+    }
     else {
         global.prestige.Plasmid.count += gains.plasmid;
         global.stats.plasmid += gains.plasmid;
@@ -467,6 +487,11 @@ export function vacuumCollapse(){
             global.prestige.AntiPlasmid.count += gains.plasmid;
             global.stats.antiplasmid += gains.plasmid;
         }
+        // ghong
+        else if (global.race.universe === 'magic'){
+            global.prestige.Magismid.count += gains.plasmid;
+            global.stats.magismid += gains.plasmid;
+        }
         else {
             global.prestige.Plasmid.count += gains.plasmid;
             global.stats.plasmid += gains.plasmid;
@@ -534,6 +559,11 @@ export function ascend(){
     if (global.race.universe === 'antimatter'){
         global.prestige.AntiPlasmid.count += gains.plasmid;
         global.stats.antiplasmid += gains.plasmid;
+    }
+    // ghong
+    else if (global.race.universe === 'magic'){
+        global.prestige.Magismid.count += gains.plasmid;
+        global.stats.magismid += gains.plasmid;
     }
     else {
         global.prestige.Plasmid.count += gains.plasmid;
@@ -737,6 +767,11 @@ export function terraform(planet){
         global.prestige.AntiPlasmid.count += gains.plasmid;
         global.stats.antiplasmid += gains.plasmid;
     }
+    // ghong
+    else if (global.race.universe === 'magic'){
+        global.prestige.Magismid.count += gains.plasmid;
+        global.stats.magismid += gains.plasmid;
+    }
     else {
         global.prestige.Plasmid.count += gains.plasmid;
         global.stats.plasmid += gains.plasmid;
@@ -838,6 +873,11 @@ export function aiApocalypse(){
         global.prestige.AntiPlasmid.count += gains.plasmid;
         global.stats.antiplasmid += gains.plasmid;
     }
+    // ghong
+    else if (global.race.universe === 'magic'){
+        global.prestige.Magismid.count += gains.plasmid;
+        global.stats.magismid += gains.plasmid;
+    }
     else {
         global.prestige.Plasmid.count += gains.plasmid;
         global.stats.plasmid += gains.plasmid;
@@ -919,6 +959,11 @@ export function matrix(){
     if (global.race.universe === 'antimatter'){
         global.prestige.AntiPlasmid.count += gains.plasmid;
         global.stats.antiplasmid += gains.plasmid;
+    }
+    // ghong
+    else if (global.race.universe === 'magic'){
+        global.prestige.Magismid.count += gains.plasmid;
+        global.stats.magismid += gains.plasmid;
     }
     else {
         global.prestige.Plasmid.count += gains.plasmid;
@@ -1004,6 +1049,11 @@ export function retirement(){
         global.prestige.AntiPlasmid.count += gains.plasmid;
         global.stats.antiplasmid += gains.plasmid;
     }
+    // ghong
+    else if (global.race.universe === 'magic'){
+        global.prestige.Magismid.count += gains.plasmid;
+        global.stats.magismid += gains.plasmid;
+    }
     else {
         global.prestige.Plasmid.count += gains.plasmid;
         global.stats.plasmid += gains.plasmid;
@@ -1087,6 +1137,11 @@ export function gardenOfEden(){
     if (global.race.universe === 'antimatter'){
         global.prestige.AntiPlasmid.count += gains.plasmid;
         global.stats.antiplasmid += gains.plasmid;
+    }
+    // ghong
+    else if (global.race.universe === 'magic'){
+        global.prestige.Magismid.count += gains.plasmid;
+        global.stats.magismid += gains.plasmid;
     }
     else {
         global.prestige.Plasmid.count += gains.plasmid;

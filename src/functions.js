@@ -211,7 +211,7 @@ export function calcTimeAccelBonus(){
 export function calcUniverseMasteryBonus(){
     let mua_level = universeLevel('magic');
     let eua_level = universeLevel('evil');
-    global.settings.magicUniverseMasteryBonus = 0.0015 * (mua_level.uLvl + mua_level.uMLvl);
+    // global.settings.magicUniverseMasteryBonus = 0.0015 * (mua_level.uLvl + mua_level.uMLvl);
     global.settings.evilUniverseMasteryBonus = 0.0015 * (eua_level.uLvl + eua_level.uMLvl);
 }
 
