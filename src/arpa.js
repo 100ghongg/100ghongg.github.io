@@ -1126,6 +1126,62 @@ export const genePool = {
         }
     },
     // ghong
+    magismid_effect_1: {
+        id: 'genes-magismid_effect_1',
+        title: loc('arpa_genepool_magismid_effect_1_title'),
+        desc: loc('arpa_genepool_magismid_effect_1_desc'),
+        reqs: {},
+        grant: ['magismid',1],
+        condition(){
+            return global.race.universe === 'magic' ? true : false;
+        },
+        cost: {
+            Plasmid(){ return 100; },
+        },
+        action(){
+            if (payCrispr('magismid_effect_1')){
+                return true;
+            }
+            return false;
+        }
+    },
+    magismid_effect_2: {
+        id: 'genes-magismid_effect_2',
+        title: loc('arpa_genepool_magismid_effect_2_title'),
+        desc: loc('arpa_genepool_magismid_effect_2_desc'),
+        reqs: { magismid: 1 },
+        grant: ['magismid',2],
+        cost: {
+            Plasmid(){ return 1200; },
+            Phage(){ return 75; },
+            Dark(){ return 2.0 }
+        },
+        action(){
+            if (payCrispr('magismid_effect_2')){
+                return true;
+            }
+            return false;
+        }
+    },
+    magismid_effect_3: {
+        id: 'genes-magismid_effect_3',
+        title: loc('arpa_genepool_magismid_effect_3_title'),
+        desc: loc('arpa_genepool_magismid_effect_3_desc'),
+        reqs: { magismid: 2 },
+        grant: ['magismid',3],
+        cost: {
+            Plasmid(){ return 2500; },
+            Phage(){ return 180; },
+            Dark(){ return 5.0 },
+            Harmony(){ return 1 }
+        },
+        action(){
+            if (payCrispr('magismid_effect_3')){
+                return true;
+            }
+            return false;
+        }
+    },
     time_acceleration_boost_1: {
         id: 'genes-time_acceleration_boost_1',
         title: loc('arpa_genepool_time_acceleration_boost_1_title'),
@@ -1182,7 +1238,7 @@ export const genePool = {
         reqs: { timeaccel: 3 },
         grant: ['timeaccelinf', 1],
         cost: {
-            Plasmid(){ return 500; },
+            Plasmid(){ return 400; },
             Phage(){ return 10; }
         },
         action(){
@@ -1216,7 +1272,7 @@ export const genePool = {
         reqs: { timeaccel: 4 },
         grant: ['timeaccel', 5],
         cost: {
-            Plasmid(){ return 1300; },
+            Plasmid(){ return 1500; },
             Phage(){ return 60; }
         },
         action(){
@@ -1233,7 +1289,7 @@ export const genePool = {
         reqs: { timeaccel: 5 },
         grant: ['timeaccel', 6],
         cost: {
-            Plasmid(){ return 1900; },
+            Plasmid(){ return 2500; },
             Phage(){ return 100; },
             Dark(){ return 0.3 }
         },
@@ -1251,7 +1307,7 @@ export const genePool = {
         reqs: { timeaccel: 6 },
         grant: ['timeaccel', 7],
         cost: {
-            Plasmid(){ return 2500; },
+            Plasmid(){ return 4000; },
             Phage(){ return 150; },
             Dark(){ return 1.0; }
         },
@@ -1269,9 +1325,10 @@ export const genePool = {
         reqs: { timeaccel: 7 },
         grant: ['timeaccel', 8],
         cost: {
-            Plasmid(){ return 5000; },
+            Plasmid(){ return 6000; },
             Phage(){ return 300; },
-            Dark(){ return 3.0; },
+            Dark(){ return 5.0; },
+            Harmony(){ return 2 }
         },
         action(){
             if (payCrispr('time_acceleration_boost_8')){
@@ -1589,8 +1646,14 @@ function payCrispr(gene){
     let costs = genePool[gene].cost;
     Object.keys(costs).forEach(function(res){
         let oRes = res;
-        if (res === 'Plasmid' && global.race.universe === 'antimatter'){
-            res = 'AntiPlasmid';
+        // ghong
+        if (res === 'Plasmid'){
+            if (global.race.universe === 'antimatter'){
+                res = 'AntiPlasmid';
+            }
+            else if (global.race.universe === 'magic'){
+                res = 'Magismid';
+            }
         }
         if (global.prestige[res].count < costs[oRes]()){
             afford = false;
@@ -1600,8 +1663,13 @@ function payCrispr(gene){
     if (afford){
         Object.keys(costs).forEach(function(res){
             let oRes = res;
-            if (res === 'Plasmid' && global.race.universe === 'antimatter'){
-                res = 'AntiPlasmid';
+            if (res === 'Plasmid'){
+                if (global.race.universe === 'antimatter'){
+                    res = 'AntiPlasmid';
+                }
+                else if (global.race.universe === 'magic'){
+                    res = 'Magismid';
+                }
             }
             global.prestige[res].count -= costs[oRes]();
         });

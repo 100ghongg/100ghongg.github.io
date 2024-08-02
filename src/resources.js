@@ -1157,8 +1157,8 @@ function loadSpecialResource(name,color) {
     color = color || 'special';
 
     if (name == 'Evilsmid' && global.settings.evilUniverseMasteryBonus > 0){
-        global.prestige.Evilsmid.count = global.settings.evilUniverseMasteryBonus * 100;
-    }   
+        global.prestige.Evilsmid.count = global.settings.evilUniverseMasteryBonus / 0.0015;
+    }
 
     var res_container = $(`<div id="res${name}" class="resource" v-show="count"><span class="res has-text-${color}">${loc(`resource_${name}_name`)}</span><span class="count">{{ count | round }}</span></div>`);
     $('#resources').append(res_container);
@@ -1206,7 +1206,7 @@ function loadSpecialResource(name,color) {
                 break;
 
             case 'Evilsmid':
-                desc.append($(`<span>${loc(`resource_${name}_desc`,[global.prestige.Evilsmid.count])}</span>`));
+                desc.append($(`<span>${loc(`resource_${name}_desc`,[global.prestige.Evilsmid.count * 0.15])}</span>`));
                 break;
 
             case 'Phage':
@@ -3122,29 +3122,24 @@ export const plasmidBonus = (function (){
                 anti /= 3;
             }
 
-            // 여기서 magismid 적용량 다시 구해줘
             // ghong
-            if (global.prestige.Magismid.count > 0){
+            if (global.genes['magismid'] > 0 && global.prestige.Magismid.count > 0){
                 let ori_plasmids = global.prestige.Plasmid.count;
                 let ori_standard = 0;
-
                 // ghong
                 let p_cap = 450 + global.prestige.Phage.count*2;
-                if (ori_plasmids > p_cap){
-                    ori_standard = (+((Math.log(p_cap + 50) - 3.91202)).toFixed(5) / 2.888) + ((Math.log(ori_plasmids + 1 - p_cap) / Math.LN2 / 250));
-                }
-                else if (ori_plasmids < 0){
+                if (ori_plasmids < 0){
                     ori_standard = 0;
                 }
                 else {
+                    ori_plasmids = ori_plasmids > p_cap ? p_cap : ori_plasmids;
                     ori_standard = +((Math.log(ori_plasmids + 50) - 3.91202)).toFixed(5) / 2.888;
                 }
                 if (global.tech['outpost_boost'] && global.race['truepath'] && p_on['alien_outpost']){
                     ori_standard *= 2;
                 }
-		        ori_standard *= 1.3;
-                // ori_standard *= Math.min(1.0, (global.prestige.Magismid.count / global.prestige.Plasmid.count));
-                magi = ori_standard * Math.min(1.0, (global.prestige.Magismid.count / (p_cap*2)));
+                magi = ori_standard * (global.genes['magismid'] * 0.2);
+                // magi = ori_standard * Math.min(1.0, (global.prestige.Magismid.count / (p_cap*2)));
             }
 
             if (global.race['nerfed']){

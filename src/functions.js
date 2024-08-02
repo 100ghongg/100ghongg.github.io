@@ -213,6 +213,7 @@ export function calcUniverseMasteryBonus(){
     let eua_level = universeLevel('evil');
     // global.settings.magicUniverseMasteryBonus = 0.0015 * (mua_level.uLvl + mua_level.uMLvl);
     global.settings.evilUniverseMasteryBonus = 0.0015 * (eua_level.uLvl + eua_level.uMLvl);
+    global.prestige.Evilsmid.count = eua_level.uLvl + eua_level.uMLvl;
 }
 
 // Adds accelerated time if enough time has passed since `global.stats.current`. Returns true if there was accelerated
