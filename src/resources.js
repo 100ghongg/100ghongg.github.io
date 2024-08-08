@@ -1206,7 +1206,7 @@ function loadSpecialResource(name,color) {
                 break;
 
             case 'Evilsmid':
-                desc.append($(`<span>${loc(`resource_${name}_desc`,[global.prestige.Evilsmid.count * 0.15])}</span>`));
+                desc.append($(`<span>${loc(`resource_${name}_desc`,[(global.prestige.Evilsmid.count * 0.15).toFixed(2)])}</span>`));
                 break;
 
             case 'Phage':
@@ -2887,7 +2887,7 @@ export const spatialReasoning = (function(){
         if (!spatial[tkey]){
             spatial[tkey] = {};
         }
-        if (!spatial[tkey][key] || recalc){            
+        if (!spatial[tkey][key] || recalc){     
             let modifier = 1;
             let noEarth = global.race['cataclysm'] || global.race['orbit_decayed'] ? true : false;
             if (global.genes['store']){
@@ -2902,11 +2902,18 @@ export const spatialReasoning = (function(){
                         raw = Math.floor(plasmids / (global.race.universe === 'antimatter' ? 2 : 5));
                     }
                     plasmids = Math.round(raw * (global.race['nerfed'] ? 0.5 : 1));
+                    // ghong plasmid storage bonus + 30%
+                    plasmids *= 1.3;
                 }
                 if (!type || (type && type === 'phage')){
                     if (global.genes['store'] >= 4){
                         plasmids += Math.round(global.prestige.Phage.count * (global.race['nerfed'] ? (1/3) : 1));
+                        // ghong phage storage bonus + 50%
+                        plasmids *= 1.5;
                     }
+                }
+                if (!type || (type && type === 'anti')){
+                    plasmids *= global.settings.evilUniverseMasteryBonus;
                 }
                 let divisor = global.genes.store >= 2 ? (global.genes.store >= 3 ? 1250 : 1666) : 2500;
                 if (global.race.universe === 'antimatter'){
@@ -2916,6 +2923,8 @@ export const spatialReasoning = (function(){
                     if (!type || (type && ((type === 'plasmid' && global.race.universe === 'antimatter') || (type === 'anti' && global.race.universe !== 'antimatter')))){
                         let raw = global.race.universe === 'antimatter' ? global.prestige.Plasmid.count / 5 : global.prestige.AntiPlasmid.count / 10;
                         plasmids += Math.round(raw * (global.race['nerfed'] ? 0.5 : 1));
+                        // ghong antiplasmid storage bonus + 30%
+                        plasmids *= 1.3;
                     }
                 }
                 modifier *= 1 + (plasmids / divisor);
@@ -3113,7 +3122,7 @@ export const plasmidBonus = (function (){
                     anti = +((Math.log(plasmids + 50) - 3.91202)).toFixed(5) / 2.888;
                 }
 
-                // ghong
+                // ghong evilsmid boost antiplasmid
 		        anti *= (1.3 + global.settings.evilUniverseMasteryBonus);
 
                 if (global.tech['outpost_boost'] && global.race['truepath'] && p_on['alien_outpost']){

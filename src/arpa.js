@@ -1337,6 +1337,25 @@ export const genePool = {
             return false;
         }
     },
+    time_acceleration_boost_9: {
+        id: 'genes-time_acceleration_boost_9',
+        title: loc('arpa_genepool_time_acceleration_boost_9_title'),
+        desc: loc('arpa_genepool_time_acceleration_boost_9_desc'),
+        reqs: { timeaccel: 8 },
+        grant: ['timeaccel', 9],
+        cost: {
+            Plasmid(){ return 12000; },
+            Phage(){ return 600; },
+            Dark(){ return 20.0; },
+            Harmony(){ return 10 }
+        },
+        action(){
+            if (payCrispr('time_acceleration_boost_9')){
+                return true;
+            }
+            return false;
+        }
+    },
 }
 
 export const bloodPool = {

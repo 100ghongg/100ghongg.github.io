@@ -197,14 +197,18 @@ export function loopTimers(){
 // ghong
 export function calcTimeAccelBonus(){
     let timeAccelerationFactorBonus = 0;
+    if (global.genes['timeaccel'] > 20) {
+        global.genes['timeaccel'] = 8;
+    }
+    
     if (global.genes['timeaccel']) {
         let bonusValue = 0, bonusRate = 0.3;
-        let gap = 0;
-        for (let i=0; i<global.genes['timeaccel']; i++){
+        let gap = 0, i = 0;
+        for (i=0; i<global.genes['timeaccel']; i++){
             if (i % 3 == 0) gap+=1;
             bonusValue += gap;
         }
-        timeAccelerationFactorBonus = (bonusValue * bonusRate).toFixed(1);
+        timeAccelerationFactorBonus = ((bonusValue * bonusRate) + (i == 9 ? 0.1 : 0.0)).toFixed(1);
     }
     global.settings.timeAccelerationFactorBonus = timeAccelerationFactorBonus;
 }
