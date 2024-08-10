@@ -615,6 +615,20 @@ export const genePool = {
             return false;
         }
     },
+    advanced_metaphase: {
+        id: 'genes-advanced_metaphase',
+        title: loc('arpa_genepool_metaphase_title'),
+        desc: loc('arpa_genepool_mitosis_desc',[12]),
+        reqs: { plasma: 2 },
+        grant: ['plasma',3],
+        cost: { Plasmid(){ return 825; } },
+        action(){
+            if (payCrispr('advanced_metaphase')){
+                return true;
+            }
+            return false;
+        }
+    },
     mutation: {
         id: 'genes-mutation',
         title: loc('arpa_genepool_mutation_title'),

@@ -9676,7 +9676,13 @@ function midLoop(){
                     let plasma = global.genes['plasma'] ? global.race.mutation : 1;
                     if (global.genes['plasma'] && plasma > 3){
                         if (global.genes['plasma'] >= 2){
-                            plasma = plasma > 5 ? 5 : plasma;
+                            // ghong
+                            if (global.genes['plasma'] >= 3) {
+                                plasma = plasma > 12 ? 12 : plasma;
+                            }
+                            else {
+                                plasma = plasma > 5 ? 5 : plasma;
+                            }
                         }
                         else {
                             plasma = 3;
