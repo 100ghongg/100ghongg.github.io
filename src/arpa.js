@@ -1337,20 +1337,73 @@ export const genePool = {
             return false;
         }
     },
-    time_acceleration_boost_9: {
-        id: 'genes-time_acceleration_boost_9',
-        title: loc('arpa_genepool_time_acceleration_boost_9_title'),
-        desc: loc('arpa_genepool_time_acceleration_boost_9_desc'),
-        reqs: { timeaccel: 8 },
-        grant: ['timeaccel', 9],
+    // time_acceleration_boost_9: {
+    //     id: 'genes-time_acceleration_boost_9',
+    //     title: loc('arpa_genepool_time_acceleration_boost_9_title'),
+    //     desc: loc('arpa_genepool_time_acceleration_boost_9_desc'),
+    //     reqs: { timeaccel: 8 },
+    //     grant: ['timeaccel', 9],
+    //     cost: {
+    //         Plasmid(){ return 12000; },
+    //         Phage(){ return 600; },
+    //         Dark(){ return 20.0; },
+    //         Harmony(){ return 10 }
+    //     },
+    //     action(){
+    //         if (payCrispr('time_acceleration_boost_9')){
+    //             return true;
+    //         }
+    //         return false;
+    //     }
+    // },
+    gene_sequence_boost_1: {
+        id: 'genes-gene_sequence_boost_1',
+        title: loc('arpa_genepool_gene_sequence_boost_1_title'),
+        desc: loc('arpa_genepool_gene_sequence_boost_1_desc'),
+        reqs: { },
+        grant: ['seqboost', 1],
         cost: {
-            Plasmid(){ return 12000; },
-            Phage(){ return 600; },
-            Dark(){ return 20.0; },
-            Harmony(){ return 10 }
+            Plasmid(){ return 500; }
         },
         action(){
-            if (payCrispr('time_acceleration_boost_9')){
+            if (payCrispr('gene_sequence_boost_1')){
+                return true;
+            }
+            return false;
+        }
+    },
+    gene_sequence_boost_2: {
+        id: 'genes-gene_sequence_boost_2',
+        title: loc('arpa_genepool_gene_sequence_boost_2_title'),
+        desc: loc('arpa_genepool_gene_sequence_boost_2_desc'),
+        reqs: { seqboost: 1 },
+        grant: ['seqboost', 2],
+        cost: {
+            Plasmid(){ return 2000; },
+            Phage(){ return 100; },
+            Dark(){ return 1.0; },
+        },
+        action(){
+            if (payCrispr('gene_sequence_boost_2')){
+                return true;
+            }
+            return false;
+        }
+    },
+    gene_sequence_boost_3: {
+        id: 'genes-gene_sequence_boost_3',
+        title: loc('arpa_genepool_gene_sequence_boost_3_title'),
+        desc: loc('arpa_genepool_gene_sequence_boost_3_desc'),
+        reqs: { seqboost: 2 },
+        grant: ['seqboost', 3],
+        cost: {
+            Plasmid(){ return 6000; },
+            Phage(){ return 300; },
+            Dark(){ return 5.0; },
+            Harmony(){ return 1 }
+        },
+        action(){
+            if (payCrispr('gene_sequence_boost_3')){
                 return true;
             }
             return false;
@@ -2030,10 +2083,10 @@ function genetics(){
                 timer(val){
                     if (global.arpa.sequence.on && global.arpa.sequence.labs > 0){
                         if (global.arpa.sequence.boost){
-                            return timeFormat(val / (global.arpa.sequence.labs * 2));
+                            return timeFormat(val / ((global.arpa.sequence.labs * 2) * (1 + (global.genes['seqboost'] ? global.genes['seqboost'] * 0.5 : 0))));
                         }
                         else {
-                            return timeFormat(val / global.arpa.sequence.labs);
+                            return timeFormat(val / ((global.arpa.sequence.labs) * (1 + (global.genes['seqboost'] ? global.genes['seqboost'] * 0.5 : 0))));
                         }
                     }
                     else {
