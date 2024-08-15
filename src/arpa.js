@@ -1593,7 +1593,28 @@ export const bloodPool = {
         reqs: {},
         grant: ['pillar','*'],
         cost: {
+            Plasmid(wiki){ return ((wiki || 0) + (global.blood['pillar'] || 0)) * 500 + 500; },
             Blood_Stone(wiki){ return ((wiki || 0) + (global.blood['pillar'] || 0)) * 30 + 30; },
+            Artifact(wiki){ return ((wiki || 0) + (global.blood['pillar'] || 0)) % 5 === 0 ? 1 : 0; }
+        },
+        effect(){ return `<span class="has-text-caution">${loc('arpa_blood_repeat')}</span>`; },
+        action(){
+            if (payBloodPrice($(this)[0].cost)){
+                return true;
+            }
+            return false;
+        }
+    },
+    magismid: {
+        id: 'blood-magismid',
+        title: loc('arpa_blood_magismid_title'),
+        desc: loc('arpa_blood_magismid_title'),
+        reqs: { },
+        grant: ['magismid','*'],
+        cost: {
+            Plasmid(wiki){ return ((wiki || 0) + (global.blood['magismid'] || 0)) * 500 + 500; },
+            Phage(wiki){ return ((wiki || 0) + (global.blood['magismid'] || 0)) * 15 + 15; },
+            Dark(wiki){ return ((wiki || 0) + (global.blood['magismid'] || 0)) * 0.5 + 0.5; },
             Artifact(wiki){ return ((wiki || 0) + (global.blood['pillar'] || 0)) % 5 === 0 ? 1 : 0; }
         },
         effect(){ return `<span class="has-text-caution">${loc('arpa_blood_repeat')}</span>`; },

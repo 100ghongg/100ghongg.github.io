@@ -3148,6 +3148,7 @@ export const plasmidBonus = (function (){
                     ori_standard *= 2;
                 }
                 magi = ori_standard * (global.genes['magismid'] * 0.2);
+                magi *= (1 + (global.blood['magismid'] ? global.blood['magismid'] * 0.1 : 0));
                 // magi = ori_standard * Math.min(1.0, (global.prestige.Magismid.count / (p_cap*2)));
             }
 
