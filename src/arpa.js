@@ -1586,6 +1586,24 @@ export const bloodPool = {
             return false;
         }
     },
+    pillar: {
+        id: 'blood-pillar',
+        title: loc('arpa_blood_pillar_title'),
+        desc: loc('arpa_blood_pillar_desc'),
+        reqs: {},
+        grant: ['pillar','*'],
+        cost: {
+            Blood_Stone(wiki){ return ((wiki || 0) + (global.blood['pillar'] || 0)) * 30 + 30; },
+            Artifact(wiki){ return ((wiki || 0) + (global.blood['pillar'] || 0)) % 5 === 0 ? 1 : 0; }
+        },
+        effect(){ return `<span class="has-text-caution">${loc('arpa_blood_repeat')}</span>`; },
+        action(){
+            if (payBloodPrice($(this)[0].cost)){
+                return true;
+            }
+            return false;
+        }
+    },
     prepared: {
         id: 'blood-prepared',
         title: loc('arpa_blood_prepared_title'),

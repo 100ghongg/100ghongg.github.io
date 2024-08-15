@@ -1375,6 +1375,12 @@ export const calcPillar = (function(){
                     active++;
                 }
             });
+            // ghong pillar
+            if (global.blood['pillar'] && global.blood['pillar'] > 0) {
+                active *= (1 + global.blood['pillar']*0.1);
+            }
+            // pillar stronger 50%
+            active = (active * 1.5).toFixed(2);
             bonus = [
                 1 + (active / 100), // Production
                 1 + (active * 2 / 100) // Storage

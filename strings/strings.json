@@ -3936,6 +3936,8 @@
   "arpa_genepool_gene_sequence_boost_1_desc": "Boost Gene Sequencing speed 50%. (total +50%)",
   "arpa_genepool_gene_sequence_boost_2_desc": "Boost Gene Sequencing speed 50%. (total +100%)",
   "arpa_genepool_gene_sequence_boost_3_desc": "Boost Gene Sequencing speed 50%. (total +150%)",
+  "arpa_blood_pillar_title": "Bloody Pillar",
+  "arpa_blood_pillar_desc": "Increases pillar bonus by 10%.",
   "arpa_genepool_rank": "Rank %0",
   "arpa_crispr_desc": "Permanently alter your DNA. These upgrades carry over across resets.",
   "arpa_blood_purify_title": "Purify",
